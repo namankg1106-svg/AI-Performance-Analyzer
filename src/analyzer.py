@@ -193,6 +193,23 @@ def safe_get(metrics, key, default=0):
     except Exception:
         return default
 
+def analyze_cpu_usage(data, normalize=False):
+    """
+    Lightweight CPU usage analyzer.
+    Adding 'normalize' keeps backward compatibility and adds optional scaling.
+    This function is unused by core system but available for future extensions.
+    """
+    if not data:
+        return 0
+
+    processed = sum(data) / len(data)
+
+    if normalize and max(data) > 0:
+        return processed / max(data)
+
+    return processed
+
+
 
 
 
